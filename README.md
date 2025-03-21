@@ -2,9 +2,9 @@
 
 **InchiriazaUsor** este o aplicație mobilă care facilitează și optimizează procesul de închiriere, oferind o experiență sigură și eficientă atât pentru proprietari, cât și pentru chiriași.
 
-## Cum funcționează?
+## Ce problema rezolva?
 
-Simplu! Să presupunem că ai o mașină pe care o folosești foarte rar și dorești să o închiriezi. Postezi un anunț prin aplicație, iar după câteva zile primești un telefon de la cineva interesat să o închirieze. Bucuros, accepți, ceri o garanție, iar clientul este de acord. Totul pare rezolvat!
+Să presupunem că ai o mașină pe care o folosești foarte rar și dorești să o închiriezi. Postezi un anunț prin aplicație, iar după câteva zile primești un telefon de la cineva interesat să o închirieze. Bucuros, accepți, ceri o garanție, iar clientul este de acord. Totul pare rezolvat!
 
 Dar, după câteva ore, clientul te sună și îți spune că s-a răzgândit și vrea banii înapoi. Evident, îi returnezi suma, iar procesul trebuie luat de la capăt.
 
