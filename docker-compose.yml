@@ -1,0 +1,33 @@
+services:
+  app:
+    build: .
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_DATA_MONGODB_HOST=mongodb
+      - SPRING_DATA_MONGODB_PORT=27017
+      - SPRING_DATA_MONGODB_DATABASE=InchiriazaUsor
+    depends_on:
+      mongodb:
+        condition: service_started
+    networks:
+      - app-network
+
+  mongodb:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+
+    # serviciul mongodb face parte din reteaua app-network
+    networks:
+      - app-network
+
+volumes:
+  mongodb_data:
+
+
+networks:
+  app-network:
+    driver: bridge # bridge permite containerele sa comunice intre ele in timp ce raman izolate de retea
