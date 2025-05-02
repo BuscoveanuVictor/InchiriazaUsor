@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inchiriaza-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: inchiriaza-app
+  template:
+    metadata:
+      labels:
+        app: inchiriaza-app
+    spec:
+      containers:
+      - name: inchiriaza-app
+        image: gcr.io/inchiriazausor/inchiriaza-app:latest
+        ports:
+        - containerPort: 8080
+        env:
+        - name: SPRING_DATA_MONGODB_HOST
+          value: "mongodb-service"
+        - name: SPRING_DATA_MONGODB_PORT
+          value: "27017"
+        - name: SPRING_DATA_MONGODB_DATABASE
+          value: "InchiriazaUsor" 
