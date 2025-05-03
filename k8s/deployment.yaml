@@ -14,13 +14,10 @@ spec:
     spec:
       containers:
       - name: inchiriaza-app
-        image: gcr.io/inchiriazausor/inchiriaza-app:latest
+        image: gcr.io/inchiriazausor/inchiriaza-app:prod
         ports:
         - containerPort: 8080
         env:
         - name: SPRING_DATA_MONGODB_HOST
           value: "mongodb-service"
-        - name: SPRING_DATA_MONGODB_PORT
-          value: "27017"
-        - name: SPRING_DATA_MONGODB_DATABASE
-          value: "InchiriazaUsor" 
+    
