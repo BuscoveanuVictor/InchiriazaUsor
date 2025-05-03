@@ -17,11 +17,11 @@ public class SecurityConfig {
         http
             .csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(authorize -> authorize
-                .requestMatchers("/", "/auth/**", "/produc/**").permitAll()
+                .requestMatchers("/", "/auth/**", "/produc/**", "/**").permitAll()
                 .anyRequest().authenticated()
             )
             .formLogin(form -> form
-                .loginPage("/auth/login") // <--- Your custom login page
+                .loginPage("/auth/login") 
                 .defaultSuccessUrl("/home", true)
                 .permitAll()
             )
