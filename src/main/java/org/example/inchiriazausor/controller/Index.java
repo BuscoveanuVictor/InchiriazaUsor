@@ -1,19 +1,14 @@
 package org.example.inchiriazausor.controller;
 
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
-
-@Configuration
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller 
-@RequestMapping("/")
+@RequestMapping("/hello")
 public class Index {
-    @GetMapping
+    @GetMapping("/salut")
     public String showIndexPage() {
         return "index"; // Returnează numele fișierului HTML fără extensie
     }
-
-
 }
