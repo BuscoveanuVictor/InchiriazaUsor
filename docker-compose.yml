@@ -8,15 +8,16 @@ services:
     volumes:
       - ./src:/app/src   
       - ./target:/app/target  
-      - ~/.m2:/root/.m2       
+      - ~/.m2:/root/.m2 
+
+    # aici se afla secretele google  
     env_file:
       - .env
+
     environment:
-      - SPRING_DATA_MONGODB_HOST = mongodb
-      - SPRING_DATA_MONGODB_PORT = 27017
-      - SPRING_DATA_MONGODB_DATABASE = InchiriazaUsor
-      - GOOGLE_CLIENT_ID 
-      - GOOGLE_CLIENT_SECRET 
+      SPRING_DATA_MONGODB_HOST : mongodb
+      SPRING_DATA_MONGODB_PORT : 27017
+      SPRING_DATA_MONGODB_DATABASE : InchiriazaUsor
     depends_on:
       mongodb:
         condition: service_healthy
@@ -28,10 +29,10 @@ services:
     image: mongo:latest
     healthcheck:
       test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
-      interval: 30s
-      timeout: 10s
+      interval: 15s
+      timeout: 5s
       retries: 3
-      start_period: 40s
+      start_period: 30s
     ports:
       - "27016:27017"
     volumes:
