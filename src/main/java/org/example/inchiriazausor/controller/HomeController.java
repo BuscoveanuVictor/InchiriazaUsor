@@ -5,10 +5,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller 
-@RequestMapping("/hello")
-public class Index {
-    @GetMapping("/salut")
+@RequestMapping("/home")
+public class HomeController {
+    @GetMapping
     public String showIndexPage() {
-        return "index"; // Returnează numele fișierului HTML fără extensie
+        return "home"; // Returnează numele fișierului HTML fără extensie
     }
+    
 }

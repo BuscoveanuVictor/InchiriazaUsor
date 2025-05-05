@@ -1,6 +1,5 @@
 package org.example.inchiriazausor.model;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,6 +13,7 @@ public class User {
     private String username;
     private String email;
     private String password;
+    private Boolean emailConfirmed = false; // Default value for email confirmation
     List<Announcement> announcements = new ArrayList<>();
 
     // Constructors
@@ -24,6 +24,10 @@ public class User {
         this.email = email;
         this.password = password;
         this.announcements = announcements; // Initialize with null or an empty list if needed
+    }
+
+    public void activateAccount() {
+        this.emailConfirmed = true;
     }
    
 
