@@ -4,7 +4,9 @@ FROM maven:3.9.6-eclipse-temurin-21 AS build
 WORKDIR /app
 COPY pom.xml .
 COPY src ./src
-RUN mvn install package -DskipTests
+# vezi ca aici se fac si testele 
+# daca vr sa dai skip poti sa adaugi -DskipTests
+RUN mvn clean package  
 
 
 # Etapa de runtime
