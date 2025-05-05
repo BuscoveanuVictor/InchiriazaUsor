@@ -3,4 +3,8 @@ WORKDIR /app
 COPY pom.xml .
 COPY src ./src
 EXPOSE 8080
+# Sping-boot run iti face si instal de dependente
+# si ruleaza aplicatia
+# Atentie cmd poate fi schimbat la rulare
+# folosind docker run image mvn clean install(un ex)
 CMD ["mvn", "spring-boot:run"]
