@@ -19,11 +19,6 @@ public class TermsController {
         this.termsRepository = termsRepository;
     }
 
-    @GetMapping("/")
-    public String home() {
-        return "home";
-    }
-
     @GetMapping("/terms")
     public String showTerms(Model model) {
         List<Terms> termsList = termsRepository.findAll();
