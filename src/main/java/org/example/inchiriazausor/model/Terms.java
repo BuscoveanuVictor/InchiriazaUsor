@@ -1,4 +1,4 @@
-package main.java.org.example.inchiriazausor.model;
+package org.example.inchiriazausor.model;
 
 import lombok.Data;
 import org.springframework.data.annotation.Id;
