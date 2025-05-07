@@ -1,7 +1,7 @@
-package main.java.org.example.inchiriazausor.controller;
+package org.example.inchiriazausor.controller;
 
-import main.java.org.example.inchiriazausor.model.Terms;
-import main.java.org.example.inchiriazausor.repository.TermsRepository;
+import org.example.inchiriazausor.model.Terms;
+import org.example.inchiriazausor.repository.TermsRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
