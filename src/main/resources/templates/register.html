@@ -114,7 +114,7 @@
             Utilizatorul există deja în baza de date!
         </div>
 
-        <div th:if="${param.success}">
+        <div th:if="${param.success}" class="success">
             Un email de confirmare a fost trimis la adresa ta de email. Te rugăm să-l verifici pentru a-ți activa contul.
         </div>
 
@@ -134,7 +134,7 @@
         <h2>Sau</h2>
 
         <a href="/oauth2/authorization/google">
-            <button class="google-button" type="button">Înregistrează-te cu Google</button>
+            <button class="google-button" type="button">Autentificare cu Google</button>
         </a>
     </div>
 </body>

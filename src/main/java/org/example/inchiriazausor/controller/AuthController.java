@@ -1,18 +1,30 @@
 package org.example.inchiriazausor.controller;
 
+
+import org.example.inchiriazausor.Util.JwtUtil;
 import org.example.inchiriazausor.model.User;
 import org.example.inchiriazausor.repository.UserRepository;
+import org.example.inchiriazausor.service.CustomUserDetailsService;
 import org.example.inchiriazausor.service.EmailService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.mail.MailException;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.mail.MailException;
+
+
+
 
 @Controller
 @RequestMapping("/auth")
@@ -25,10 +37,34 @@ public class AuthController {
     @Autowired
     private EmailService confirmationEmailService;
 
+    @Autowired
+    private AuthenticationManager authenticationManager;
+
+    @Autowired
+    private CustomUserDetailsService userDetailsService;
+
+
     @GetMapping("/login")
     public String showLoginPage() {
         return "login"; // Returnează numele fișierului HTML fără extensie
     }
+
+    @PostMapping("/login")
+    public ResponseEntity<?> login(@RequestBody User request) {
+        
+        Authentication auth = authenticationManager.authenticate(
+            new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword()
+        ));
+       
+    
+        UserDetails userDetails = userDetailsService.loadUserByUsername(request.getUsername());
+        String token = JwtUtil.generateAuthToken(userDetails);
+
+        return ResponseEntity.ok(token);
+
+    }
+    
+    
 
     @GetMapping("/register")
     public String showRegisterPage() {
@@ -37,8 +73,11 @@ public class AuthController {
 
     @Transactional
     @PostMapping("/register")
-    public String registerUser(@RequestParam String username, @RequestParam String email, @RequestParam String password) 
-        throws Exception
+    public String registerUser(
+        @RequestParam String username, 
+        @RequestParam String email, 
+        @RequestParam String password
+    ) throws Exception
     {
         logger.info("Cerere de inregistrare pentru utilizatorul: " + username);
     
@@ -53,10 +92,14 @@ public class AuthController {
         newUser.setPassword(password); 
         
     
+        String token = JwtUtil.generateEmailConfirmationToken(newUser.getEmail());
+        String link =  "localhost:8000/auth/confirm-email?token=" + token;
+    
         String content =
         """
-            <p> Te-ai inregistrat cu succes pe inchiriazausor.site</p>
-        """;
+            <p> Acceseaza urmatorul link pentru a-ti cofirma emailul %s </p>
+
+        """.formatted(link);
 
         userRepository.save(newUser);
         
@@ -67,6 +110,26 @@ public class AuthController {
             throw new Exception("Eroare la trimiterea emailului de confirmare");
         }
 
-        return "redirect:/register?success=true";
+        return "redirect:/auth/register?success=true";
     }
+
+    @GetMapping("/confirm-email")
+    public String confirmEmail(@RequestParam String token) {
+        String email = JwtUtil.extractEmailFromToken(token);
+        User user = userRepository.findByEmail(email);
+    
+        if (user != null) {
+            user.activateAccount();
+            // Aici save lucreaza ca un update
+            // pentru ca id-ul userului este deja setat
+            userRepository.save(user);
+            logger.info("Contul utilizatorului " + email + " a fost activat.");
+            return "redirect:/home";
+        } else {
+            logger.warn("Token invalid sau utilizator inexistent.");
+            return "redirect:/home";
+        }
+    }
+
+
 }

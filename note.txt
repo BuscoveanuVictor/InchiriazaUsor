@@ -38,3 +38,25 @@ nimic pana cand nu se reconstruieste imagine
 Dar poti sa pui tot source code ul in container si acolo sa-l rulezi cu
 maven spring-boot:run si atunci  devtools-ul va vedea schimbarile si
 va recompila programul si rula 
+
+
+! ip uri
+ip public - adresa blocului - Dumbrava Noua nr 7 M17
+ip private - scara blocului - scara 1 
+portul - apartamentul 
+
+! API si REST API
+API (Application Programming Interface)	Concept general – orice mecanism care permite două aplicații să comunice între ele.
+REST API (REpresentational State Transfer API)	O implementare specifică de API care urmează regulile REST și folosește HTTP pentru a accesa resurse.
+
+! Log vs events
+Logs: „Ce a spus aplicația”
+Events: „Ce a făcut aplicația”
+
+! Noduri Pods Namespaces cgroups
+
+Namespace	Izolarea logică a resurselor dintr-un cluster Kubernetes.	Izolarea aplicațiilor pentru medii de dezvoltare/testare/producție.
+Cgroups	Controlul resurselor (CPU, memorie, I/O) alocate proceselor din containere.	Limitarea utilizării resurselor de către containere (ex: CPU, memorie, I/O).
+Pod	Unitate de execuție pentru containere care împart aceleași resurse.	Rularea unui serviciu sau aplicație, cu unul sau mai multe containere în cadrul unui pod.
+Node	Mașină fizică sau virtuală care rulează un cluster Kubernetes.	Găzduirea și rularea podurilor pe nodurile de calcul sau control din cluster.
+

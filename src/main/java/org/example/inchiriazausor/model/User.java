@@ -13,24 +13,36 @@ public class User {
     private String username;
     private String email;
     private String password;
+    private List<String> role; // Default role, can be "user" or "admin"
     private Boolean emailConfirmed = false; // Default value for email confirmation
     List<Announcement> announcements = new ArrayList<>();
 
     // Constructors
     public User() {}
 
-    public User(String username, String email, String password, List<Announcement> announcements) {
+    public User(
+            String username, 
+            String email, 
+            String password,  
+            List<Announcement> announcements, 
+            List<String> role
+    ) 
+    {
         this.username = username;
         this.email = email;
         this.password = password;
         this.announcements = announcements; // Initialize with null or an empty list if needed
+        this.role = role;
+    }
+
+    public List<String> getRole() {
+        return role;
     }
 
     public void activateAccount() {
         this.emailConfirmed = true;
     }
    
-
     // Getters and Setters
     public String getId() {
         return id;
